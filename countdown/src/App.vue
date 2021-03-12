@@ -1,17 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>The Counter Component</h1>
+  <the-counter
+    :year="2022"
+    :month="2"
+    :date="12"
+    :hour="12"
+    :minute="13"
+    :second="0"
+    :millisecond="0"
+  />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import TheCounter from "@/components/TheCounter.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    TheCounter,
+  },
+};
 </script>
 
 <style>
