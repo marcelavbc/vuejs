@@ -16,7 +16,15 @@ export default {
   props: ["product"],
   computed: {
     description() {
-      return this.product.description.substring(0, 150);
+      let description = this.product.description;
+      if (description.length < 100) {
+        return description;
+      } else return description.substring(0, 100) + "...";
+    },
+  },
+  methods: {
+    viewProduct() {
+      this.$store.commit("addToCart", this.product);
     },
   },
 };

@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import items from "../data/items";
 
 function updateLocalStorage(cart) {
   localStorage.setItem('cart', JSON.stringify(cart))
@@ -6,9 +7,14 @@ function updateLocalStorage(cart) {
 
 export default createStore({
   state: {
-    cart: []
+    items: items,
+    cart: [],
+    product: {}
   },
   getters: {
+    allProducts(state) {
+      return state.items
+     },
     productQuantity: state => product => {
       const item = state.cart.find(i => i.id === product.id);
       if (item) return item.quantity;
@@ -16,10 +22,10 @@ export default createStore({
     },
     cartItems: state => {
       return state.cart
-    }, 
+    },
     cartTotal: state => {
       return state.cart.reduce((a, b) => a + (b.price * b.quantity), 0)
-    }
+    },
   },
   mutations: {
     addToCart(state, product) {
@@ -48,10 +54,11 @@ export default createStore({
       if (cart) {
         state.cart = JSON.parse(cart)
       }
+    },
+    viewProduct(state, product) {
+      let item = state.cart.find(i => i.id === product.id)
+      console.log(state.product)
+      this.product = item
     }
-  },
-  actions: {
-  },
-  modules: {
   }
 })

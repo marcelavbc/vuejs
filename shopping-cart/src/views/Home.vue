@@ -7,7 +7,7 @@
     />
     <div class="product-cards-container">
       <ProductSummaryCard
-        v-for="product in items"
+        v-for="product in allProducts"
         :key="product.id"
         :product="product"
         v-on:view-product="viewProduct($event)"
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import items from "../data/items.js";
 import ProductSummaryCard from "../components/products/ProductSummaryCard";
 import ProductDescriptionDrawer from "../components/products/ProductDescriptionDrawer";
 
@@ -29,7 +28,6 @@ export default {
   },
   data() {
     return {
-      items: items,
       product: null,
       active: {
         product_drawer: false,
@@ -46,6 +44,11 @@ export default {
       this.active.product_drawer = false
     }
   },
+  computed:{
+    allProducts(){
+      return this.$store.getters.allProducts
+    }
+  }
 };
 </script>
 
