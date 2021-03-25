@@ -5,6 +5,9 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+import Appear from '@/components/Appear'
+Vue.component('Appear', Appear)
+
 new Vue({
   router,
   store,
