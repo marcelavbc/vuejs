@@ -60,6 +60,10 @@ export default {
         height: 100%;
         object-fit: cover;
         border-radius: 5px 5px 5px 40px;
+        filter: grayscale(100%);
+        &:hover {
+          filter: grayscale(0);
+        }
       }
     }
   }
@@ -68,6 +72,7 @@ export default {
     height: 98%;
     margin: 3px 3px 3px 10px;
     object-fit: cover;
+    border-radius: 15px 15px 120px 15px;
   }
 }
 </style>
