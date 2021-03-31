@@ -1,6 +1,10 @@
 <template>
   <div class="input">
-    <input type="text" placeholder="Type to search" />
+    <input
+      type="text"
+      placeholder="Type to search"
+      @keyup="getIngredient($event)"
+    />
     <div class="icon-input">
       <i class="fas fa-search"></i>
     </div>
@@ -8,7 +12,39 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+export default {
+  methods: {
+    getIngredient(event) {
+      let arrayIngredientes = this.$store.state.ingredients;
+
+      let input = event.target.value.toLowerCase();
+      console.log(input);
+      const options = {
+        method: "GET",
+        url:
+          "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete",
+        params: { number: "5", query: input },
+        headers: {
+          "x-rapidapi-key":
+            "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
+          "x-rapidapi-host":
+            "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        },
+      };
+
+      axios
+        .request(options)
+        .then(function (response) {
+          console.log(response.data);
+          response.data.forEach(ingredient => arrayIngredientes.unshift(ingredient));
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

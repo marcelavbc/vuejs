@@ -27,6 +27,7 @@ export default {};
     width: 100%;
     position: fixed;
     bottom: 0;
+    background: white;
     .nav-content {
       display: flex;
       justify-content: space-between;

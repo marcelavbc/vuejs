@@ -1,31 +1,39 @@
 <template>
-  <div class="scroll-menu">
-    <div class="scroll-content">
-      <div class="avatar" v-for="(item, index) in 10" :key="index">
-        <i class="fas fa-hamburger"></i>
+  <div class="ingredient-box">
+    <h4>Ingredients:</h4>
+    <div class="scroll-content box-content">
+      <div
+        class="ingredient"
+        v-for="(item, index) in this.$store.state.ingredients"
+        :key="index"
+      >
+        <the-ingredient-img>
+          <img :src="`https://spoonacular.com/cdn/ingredients_100x100/${item.image}`" :alt="item.name" @click="addIngredient(item)" />
+          <p>{{ item.name }}</p>
+        </the-ingredient-img>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import TheIngredientImg from "./TheIngredientImg.vue";
+export default {
+  components: { TheIngredientImg },
+  methods: {
+    addIngredient(item) {
+      let index = this.$store.state.ingredientsSelected.findIndex(
+        (element) => element.name === item.name
+      );
+
+       index === -1
+        ? this.$store.state.ingredientsSelected.push(item)
+        : console.log('Ingridient already selected')
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.scroll-menu {
-  .scroll-content {
-    display: flex;
-    overflow-y: auto;
-    .avatar {
-      background-color: rgba(250, 248, 248);
-      padding: 1.3rem;
-      border-radius: 1rem;
-      margin: .3rem;
-      i {
-        color: rgba(255, 131, 62);
-      }
-    }
-  }
-}
+
 </style>
