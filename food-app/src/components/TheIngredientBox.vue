@@ -17,7 +17,6 @@
         </the-ingredient-img>
       </div>
     </div>
-    <!-- <button v-if="this.$store.state.ingredientsSelected.length">Find</button> -->
   </div>
 </template>
 

@@ -9,6 +9,7 @@ export default{
             ingredients: [],
             ingredientsSelected: [],
             input:'',
+            recipes: []
         }
     }, 
     getters,

@@ -7,6 +7,7 @@
       <the-search-bar />
       <the-scroll-menu />
       <the-ingredient-box />
+      <the-cook-button/>
     </main>
   </div>
 </template>
@@ -16,10 +17,11 @@
 import TheSearchBar from "../components/TheSearchBar";
 import TheScrollMenu from "../components/TheScrollMenu";
 import TheIngredientBox from "../components/TheIngredientBox";
+import TheCookButton from '../components/TheCookButton';
 
 export default {
   name: "Home",
-  components: { TheSearchBar, TheScrollMenu, TheIngredientBox },
+  components: { TheSearchBar, TheScrollMenu, TheIngredientBox, TheCookButton },
 };
 </script>
 

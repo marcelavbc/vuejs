@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     getIngredient(event) {
-      this.$store.dispatch("recipes/loadIngredients", event);
+      this.$store.dispatch("recipes/loadTheIngredients", event);
     },
   },
 };
