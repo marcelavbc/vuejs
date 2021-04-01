@@ -6,6 +6,7 @@ import TheIngredientImg from './components/TheIngredientImg'
 
 Vue.config.productionTip = false
 Vue.component('the-ingredient-img', TheIngredientImg)
+
 new Vue({
   router,
   store,

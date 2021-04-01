@@ -4,6 +4,7 @@
       type="text"
       placeholder="Type to search"
       @keyup="getIngredient($event)"
+      v-model="inputValue"
     />
     <div class="icon-input">
       <i class="fas fa-search"></i>
@@ -14,17 +15,27 @@
 <script>
 import axios from "axios";
 export default {
+  name: "TheSearchBar",
+  computed: {
+    inputValue: {
+      get() {
+        return this.$store.getters["recipes/getInputValue"];
+      },
+      set(value) {
+        this.$store.commit("recipes/changeInput", value);
+      },
+    },
+  },
   methods: {
     getIngredient(event) {
-      let arrayIngredientes = this.$store.state.ingredients;
-
-      let input = event.target.value.toLowerCase();
-      console.log(input);
+      const newValue = event.target.value.toLowerCase();
+      const arrayIngredients = this.$store.getters["recipes/ingredients"];
+      
       const options = {
         method: "GET",
         url:
           "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete",
-        params: { number: "5", query: input },
+        params: { number: "2", query: newValue },
         headers: {
           "x-rapidapi-key":
             "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
@@ -36,8 +47,9 @@ export default {
       axios
         .request(options)
         .then(function (response) {
-          console.log(response.data);
-          response.data.forEach(ingredient => arrayIngredientes.unshift(ingredient));
+          response.data.forEach((ingredient) =>
+            arrayIngredients.unshift(ingredient)
+          );
         })
         .catch(function (error) {
           console.error(error);

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="header">
-      <h2 class="title">Hello, <strong>User</strong></h2>
+      <h2 class="title">Hello, <strong>Chef</strong></h2>
     </div>
     <main>
       <the-search-bar />

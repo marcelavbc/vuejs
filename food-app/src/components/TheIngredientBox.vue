@@ -4,14 +4,13 @@
     <div class="box-content selected-box">
       <div
         class="ingredient"
-        v-for="(item, index) in this.$store.state.ingredientsSelected"
+        v-for="(item, index) in selectedIngredients"
         :key="index"
       >
         <the-ingredient-img>
           <img
             :src="`https://spoonacular.com/cdn/ingredients_100x100/${item.image}`"
             :alt="item.name"
-            @click="addIngredient(item)"
           />
           <p>{{ item.name }}</p>
         </the-ingredient-img>
@@ -22,7 +21,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+    name: "TheIngredientBox",
+    computed: {
+        selectedIngredients(){
+            return this.$store.getters["recipes/ingredientsSelected"]
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
