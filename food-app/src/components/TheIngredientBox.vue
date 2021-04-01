@@ -11,6 +11,7 @@
           <img
             :src="`https://spoonacular.com/cdn/ingredients_100x100/${item.image}`"
             :alt="item.name"
+            @click="deleteIngredient(item)"
           />
           <p>{{ item.name }}</p>
         </the-ingredient-img>
@@ -22,15 +23,19 @@
 
 <script>
 export default {
-    name: "TheIngredientBox",
-    computed: {
-        selectedIngredients(){
-            return this.$store.getters["recipes/ingredientsSelected"]
-        }
-    }
+  name: "TheIngredientBox",
+  computed: {
+    selectedIngredients() {
+      return this.$store.getters["recipes/ingredientsSelected"];
+    },
+  },
+  methods: {
+    deleteIngredient(item) {
+      this.$store.commit("recipes/deleteIngredient", item);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
 </style>

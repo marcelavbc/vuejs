@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   name: "TheSearchBar",
   computed: {
@@ -28,32 +28,7 @@ export default {
   },
   methods: {
     getIngredient(event) {
-      const newValue = event.target.value.toLowerCase();
-      const arrayIngredients = this.$store.getters["recipes/ingredients"];
-      
-      const options = {
-        method: "GET",
-        url:
-          "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete",
-        params: { number: "2", query: newValue },
-        headers: {
-          "x-rapidapi-key":
-            "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
-          "x-rapidapi-host":
-            "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-        },
-      };
-
-      axios
-        .request(options)
-        .then(function (response) {
-          response.data.forEach((ingredient) =>
-            arrayIngredients.unshift(ingredient)
-          );
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+      this.$store.dispatch("recipes/loadIngredients", event);
     },
   },
 };

@@ -17,7 +17,7 @@
         </the-ingredient-img>
       </div>
     </div>
-    <p v-else>No ingredients to add</p>
+    <div v-else class="scroll-content box-content"></div>
   </div>
 </template>
 
@@ -40,15 +40,12 @@ export default {
         (element) => element.name === item.name
       );
       if(index === -1){
-        this.$store.commit("recipes/addIngredientToList", item)
-        this.$store.commit("recipes/changeInput", '')
-        console.log(this.$store.state.input)
+        this.$store.commit("recipes/addIngredientToList", item);
+        this.$store.commit("recipes/changeInput", '');
+        this.$store.commit("recipes/cleanIngredientsList")
       } else {
           console.log('added before')
-      }
-      
-
-        
+      }   
     },
   },
 };

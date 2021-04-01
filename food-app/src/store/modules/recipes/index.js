@@ -6,8 +6,8 @@ export default{
     namespaced: true,
     state(){
         return {
-            ingredients: [{name: 'tomato', image: 'tomato.jpg'}],
-            ingredientsSelected: [{name: 'tomato', image: 'tomato.jpg'}],
+            ingredients: [],
+            ingredientsSelected: [],
             input:'',
         }
     }, 
