@@ -1,16 +1,19 @@
 <template>
   <div class="button-div">
-    <button class="grey-button" @click="getRecipes">Find recipes</button>
+    <router-link to="/recipes">
+      <button class="grey-button" @click="getRecipes">Find recipes</button>
+    </router-link>
+    
   </div>
 </template>
 
 <script>
 export default {
   name: "TheCookButton",
-
+  
   methods: {
     getRecipes() {
-      this.$store.dispatch("recipes/loadTheRecipes", 'array');
+      this.$store.dispatch("recipes/loadTheRecipes", "array");
     },
   },
 };

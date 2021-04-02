@@ -10,5 +10,8 @@ export default{
     }, 
     getInputValue(state){
         return state.input
+    }, 
+    getSuggestedRecipes(state){
+        return state.recipes
     }
 }

@@ -42,7 +42,7 @@ export default {
       if(index === -1){
         this.$store.commit("recipes/addIngredientToList", item);
         this.$store.commit("recipes/changeInput", '');
-        this.$store.commit("recipes/cleanIngredientsList")
+        // this.$store.commit("recipes/cleanIngredientsList")
       } else {
           console.log('added before')
       }   
