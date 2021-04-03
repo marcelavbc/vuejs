@@ -19,5 +19,15 @@ export default {
     },
     loadRecipes(state, payload){
         state.recipes = payload;
+    }, 
+    loadRecipeDetail(state, payload){
+        state.recipeInDetail = payload;
+    }, 
+    cleanSelection(state){
+        state.ingredientsSelected = [];
+    }, 
+    toggleModal(state){
+        state.showModal = !state.showModal;
     }
+    
 }

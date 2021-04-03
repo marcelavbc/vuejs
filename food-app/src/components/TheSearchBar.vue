@@ -25,6 +25,7 @@ export default {
         this.$store.commit("recipes/changeInput", value);
       },
     },
+    
   },
   methods: {
     getIngredient(event) {

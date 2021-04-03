@@ -17,12 +17,13 @@
         </the-ingredient-img>
       </div>
     </div>
-    <div v-else class="scroll-content box-content"></div>
+    <div v-else class="scroll-content box-content">
+    </div>
   </div>
 </template>
 
 <script>
-import TheIngredientImg from "./TheIngredientImg.vue";
+import TheIngredientImg from "../ingredients/TheIngredientImg";
 export default {
   name: "TheScrollMenu",
   components: { TheIngredientImg },
@@ -33,19 +34,20 @@ export default {
     hasIngredients() {
       return this.$store.getters["recipes/hasIngredients"];
     },
+    
   },
   methods: {
     addIngredient(item) {
       let index = this.$store.getters["recipes/ingredientsSelected"].findIndex(
         (element) => element.name === item.name
       );
-      if(index === -1){
+      if (index === -1) {
         this.$store.commit("recipes/addIngredientToList", item);
-        this.$store.commit("recipes/changeInput", '');
+        this.$store.commit("recipes/changeInput", "");
         // this.$store.commit("recipes/cleanIngredientsList")
       } else {
-          console.log('added before')
-      }   
+        console.log("added before");
+      }
     },
   },
 };

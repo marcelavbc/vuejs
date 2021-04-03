@@ -7,22 +7,27 @@
         v-for="(item, index) in selectedIngredients"
         :key="index"
       >
-        <the-ingredient-img>
-          <img
-            :src="`https://spoonacular.com/cdn/ingredients_100x100/${item.image}`"
-            :alt="item.name"
-            @click="deleteIngredient(item)"
-          />
-          <p>{{ item.name }}</p>
-        </the-ingredient-img>
+        <appear>
+          <the-ingredient-img>
+            <img
+              :src="`https://spoonacular.com/cdn/ingredients_100x100/${item.image}`"
+              :alt="item.name"
+              @click="deleteIngredient(item)"
+            />
+            <p>{{ item.name }}</p>
+          </the-ingredient-img>
+        </appear>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import TheIngredientImg from "./TheIngredientImg";
+
 export default {
-  name: "TheIngredientBox",
+  components: { TheIngredientImg },
+  name: "IngredientsSelectedBox",
   computed: {
     selectedIngredients() {
       return this.$store.getters["recipes/ingredientsSelected"];

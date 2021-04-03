@@ -3,6 +3,7 @@ import axios from 'axios';
 export default {
     async loadTheIngredients(context, payload) {
         const newValue = payload.target.value.toLowerCase();
+        context.state.loadingIng = true;
         const options = {
             method: "GET",
             url:
@@ -22,13 +23,13 @@ export default {
         })
         context.commit('loadIngredients', suggestedIngredients)
     },
-    async loadTheRecipes(context, payload) {
-        console.log(context, payload)
+    async loadTheRecipes(context) {
+        context.state.loading = true;
+
         const params = context.state.ingredientsSelected;
         const ingrNames = []
         params.forEach(obj => ingrNames.push(obj.name))
         const paramToSearch = ingrNames.join()
-        console.log(paramToSearch)
 
         const options = {
             method: 'GET',
@@ -52,13 +53,9 @@ export default {
         res.data.forEach(recipe => {
             suggestedRecipes.push(recipe)
         })
-
-        //console.log('suggestedRecipes', suggestedRecipes)
-
         let ids = [];
         suggestedRecipes.forEach(recipe => ids.push(recipe.id));
         const idsToSearch = ids.join()
-        console.log(idsToSearch)
 
         const optionsIds = {
             method: 'GET',
@@ -86,9 +83,16 @@ export default {
                 }
             }
         }
+        context.state.loading = false
 
-        console.log('finalRecipes', finalRecipes)
         context.commit('loadRecipes', finalRecipes)
+    }, 
+
+    async loadTheRecipeDetail(context, payload){
+        const recipesArray = context.state.recipes;
+        const recipe = await recipesArray.find(recipe => recipe.id === payload)
+        console.log(recipe)
+        context.commit('loadRecipeDetail', recipe)
     }
 
 

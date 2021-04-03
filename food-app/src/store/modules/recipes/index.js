@@ -9,7 +9,10 @@ export default{
             ingredients: [],
             ingredientsSelected: [],
             input:'',
-            recipes: []
+            recipes: [], 
+            recipeInDetail:{},
+            loading: true,
+            showModal: false,
         }
     }, 
     getters,

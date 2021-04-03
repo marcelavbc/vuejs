@@ -25,9 +25,11 @@ export default {};
 #nav {
   .nav-container {
     width: 100%;
+    height: 3rem;
     position: fixed;
-    bottom: 0;
-    background: white;
+    top:0;
+    background-color: rgba(250, 248, 248);
+    margin-bottom: 1rem;
     .nav-content {
       display: flex;
       justify-content: space-between;
@@ -36,7 +38,7 @@ export default {};
         font-weight: bold;
         color: rgba(163, 163, 163);
         &.router-link-exact-active {
-          color: rgba(255, 131, 62);
+          color: #ff833e;
         }
       }
     }

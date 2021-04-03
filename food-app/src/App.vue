@@ -1,16 +1,18 @@
 <template>
   <div id="app">
     <div id="nav">
-      <the-footer></the-footer>
+      <the-nav></the-nav>
     </div>
-    <router-view />
+    <div class="main">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
-import TheFooter from "./components/TheFooter";
+import TheNav from "./components/TheNav";
 export default {
-  components: { TheFooter },
+  components: { TheNav },
 };
 </script>
 
@@ -27,5 +29,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+
+  
 }
 </style>
