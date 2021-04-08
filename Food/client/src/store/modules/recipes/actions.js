@@ -8,7 +8,7 @@ export default {
             method: "GET",
             url:
                 "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete",
-            params: { number: "5", query: newValue },
+            params: { number: "15", query: newValue },
             headers: {
                 'x-rapidapi-key': process.env.VUE_APP_SPOONCULAR_API_KEY,
                 "x-rapidapi-host":
@@ -36,7 +36,7 @@ export default {
             url: 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients',
             params: {
                 ingredients: paramToSearch,
-                number: '2',
+                number: '20',
 
 
                 ranking: '1',

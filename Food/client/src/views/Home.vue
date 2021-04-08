@@ -1,7 +1,14 @@
 <template>
   <div class="home">
     <div class="header">
-      <h2 class="title">Hello, <strong>Chef</strong></h2>
+      <h2 class="title">
+        Hello,
+        <strong>
+          <span v-if="isLoggedIn">{{ getUser.username }}</span>
+          <span v-else>Chef</span>
+        </strong>
+      </h2>
+      <!-- <button @click="showState">click</button> -->
     </div>
     <main>
       <the-search-bar />
@@ -38,7 +45,18 @@ export default {
     selectedIngredients() {
       return this.$store.getters["recipes/ingredientsSelected"];
     },
+    isLoggedIn() {
+      return this.$store.getters["users/isLoggedIn"];
+    },
+    getUser() {
+      return this.$store.getters["users/user"];
+    },
   },
+  methods: {
+    showState(){
+      console.log(this.$store.state.users)
+    }
+  }
 };
 </script>
 
