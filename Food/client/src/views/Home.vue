@@ -8,7 +8,7 @@
           <span v-else>Chef</span>
         </strong>
       </h2>
-      <!-- <button @click="showState">click</button> -->
+      <button @click="showState">click</button>
     </div>
     <main>
       <the-search-bar />

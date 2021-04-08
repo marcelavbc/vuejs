@@ -5,11 +5,6 @@
         <i class="fas fa-home"></i>
       </router-link>
       <div v-if="isLoggedIn">
-        <router-link to="/basket">
-          <i class="fas fa-shopping-basket"></i>
-        </router-link>
-      </div>
-      <div v-if="isLoggedIn">
         <router-link to="/favorites">
           <i class="far fa-heart"></i>
         </router-link>

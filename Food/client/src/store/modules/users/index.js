@@ -10,7 +10,8 @@ export default {
             token: localStorage.getItem('token') || '',
             user: {},
             status: '', 
-            error: null
+            error: null,
+            loggedIn: false
         }
     },
     getters,

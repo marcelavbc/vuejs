@@ -20,7 +20,7 @@
     </alert-modal>
     <div class="recipe-card">
       <div class="img-container">
-        <img :src="image" alt="Chai Oatmeal" />
+        <img :src="image" :alt="title" />
         <slot />
       </div>
 
@@ -41,7 +41,13 @@
           </li>
 
           <li class="save-recipe-icon">
-            <span @click="toggleModal"><i class="far fa-heart icon"></i> </span>
+            <div v-if="isLoggedIn">
+            <span @click="addToFavorites"><i class="icon" :class="{'fas fa-heart' : isFavorite, 'far fa-heart': !isFavorite}"></i> </span>
+            </div>
+
+            <div v-else>
+            <span @click="toggleModal"><i class="fa-heart icon"></i> </span>
+            </div>
           </li>
         </ul>
         <div class="ingredients">
@@ -91,6 +97,11 @@
 <script>
 export default {
   name: "TheRecipeCard",
+  data(){
+    return {
+      isFavorite: false
+    }
+  },
   props: [
     "title",
     "image",
@@ -107,12 +118,21 @@ export default {
     toggleModal() {
       this.$store.commit("recipes/toggleModal");
     },
+    addToFavorites(){
+      this.isFavorite = !this.isFavorite;
+      console.log('added')
+    }
   },
   computed: {
     showModal() {
       return this.$store.getters["recipes/showModal"];
     },
+    isLoggedIn() {
+      return this.$store.getters["users/isLoggedIn"]
+    }, 
+    
   },
+
 };
 </script>
 

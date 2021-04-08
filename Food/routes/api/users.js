@@ -17,7 +17,8 @@ router.post('/register', (req, res) => {
         username,
         email,
         password,
-        confirm_password
+        confirm_password,
+        recipes
     } = req.body
     if (password !== confirm_password) {
         return res.status(400).json({
@@ -49,7 +50,8 @@ router.post('/register', (req, res) => {
         name,
         username,
         password,
-        email
+        email,
+        recipes
     });
     // Hash the password
     bcrypt.genSalt(10, (err, salt) => {

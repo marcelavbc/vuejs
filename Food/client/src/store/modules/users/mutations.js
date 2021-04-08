@@ -6,7 +6,8 @@ export default {
         state.user = payload;
         state.status = "success";
         state.token = payload.token;
-        state.error = null
+        state.error = null,
+        state.loggedIn = true
     },
     loginError(state, err) {
         state.error = err
@@ -19,11 +20,14 @@ export default {
         state.user = payload;
         state.error = null
         state.status = 'success'
+        state.loggedIn = true
     },
     logout_user(state) {
         state.error = null
         state.status = ''
         state.token = ''
         state.user = ''
+        state.loggedIn = false
+
     }
 }

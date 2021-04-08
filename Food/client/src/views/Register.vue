@@ -45,7 +45,7 @@
               id="confirm_password"
               v-model="confirm_password"
             />
-            <input type="submit" class="btn" value="Login" />
+            <input type="submit" class="btn" value="Sign up" />
           </div>
         </form>
         <router-link to="/login" class="link btn"
@@ -68,6 +68,7 @@ export default {
       email: "",
       password: "",
       confirm_password: "",
+      recipes: []
     };
   },
   methods: {
@@ -78,6 +79,7 @@ export default {
         confirm_password: this.confirm_password,
         email: this.email,
         name: this.name,
+        recipes: this.recipes
       };
       this.$store.dispatch("users/register", user);
     },

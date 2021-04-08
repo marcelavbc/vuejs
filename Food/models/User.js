@@ -20,6 +20,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    recipes: {
+        type: Array,
+        default: []
+    },
     date: {
         type: Date,
         default: Date.now

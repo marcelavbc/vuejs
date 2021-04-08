@@ -23,17 +23,25 @@ export default {
     async register(context, payload) {
         context.commit('register_request')
         let res = await axios.post('http://localhost:5000/api/users/register', payload);
+        // let user = {}
+
         if (res.data.success) {
-            console.log('hello', res)
-            router.push("/")
+            console.log('res', res)
+            // const token = res.data.token;
+            // user = res.data.user;
+            // user.token = token;
+            // localStorage.setItem('token', token);
+            // axios.defaults.headers.common['Authorization'] = token;
             context.commit('registerUser', payload);
+            router.push("/")
+
         }
     }, 
     async logout(context) {
         await localStorage.removeItem('token');
         context.commit('logout_user');
         delete axios.defaults.headers.common['Authorization'];
-        router.push('/login');
+        router.push('/');
         return
     }
 }
