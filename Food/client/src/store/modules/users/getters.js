@@ -1,6 +1,6 @@
 export default {
-    isLoggedIn: state => state.loggedIn,
-    authState: state => state.status,
+    isLoggedIn: state => !!state.token,
+    authStatus: state => state.status,
     user: state => state.user,
-    error: state => state.error
+    
 }

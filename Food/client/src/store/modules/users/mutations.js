@@ -1,33 +1,21 @@
 export default {
-    login_request(state) {
-        state.status = "loading";
-    },
-    loginUser(state, payload) {
-        state.user = payload;
-        state.status = "success";
-        state.token = payload.token;
-        state.error = null,
-        state.loggedIn = true
-    },
-    loginError(state, err) {
-        state.error = err
-    },
-    register_request(state) {
-        state.error = null
+    auth_request(state) {
         state.status = 'loading'
     },
-    registerUser(state, payload) {
-        state.user = payload;
-        state.error = null
+    auth_success(state, {token, user}) {
         state.status = 'success'
-        state.loggedIn = true
+        state.token = token
+        state.user = user
     },
-    logout_user(state) {
-        state.error = null
+    auth_error(state) {
+        state.status = 'error'
+    },
+    logout(state) {
         state.status = ''
         state.token = ''
-        state.user = ''
-        state.loggedIn = false
-
+        state.user = {}
+    },
+    add_recipe(state, recipe){
+        state.recipes.push(recipe)
     }
 }

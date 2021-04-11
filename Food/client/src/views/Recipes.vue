@@ -15,6 +15,7 @@
           :usedIngredients="recipe.usedIngredients"
           :vegetarian="recipe.vegetarian"
           :id="recipe.id"
+          :recipe="recipe"
         >
           <router-link
             :to="{ name: 'RecipeDetails', params: { id: recipe.id } }"

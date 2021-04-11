@@ -7,11 +7,10 @@ export default {
     namespaced: true,
     state() {
         return {
+            status: '',
             token: localStorage.getItem('token') || '',
             user: {},
-            status: '', 
-            error: null,
-            loggedIn: false
+            recipes: []
         }
     },
     getters,

@@ -42,11 +42,19 @@
 
           <li class="save-recipe-icon">
             <div v-if="isLoggedIn">
-            <span @click="addToFavorites"><i class="icon" :class="{'fas fa-heart' : isFavorite, 'far fa-heart': !isFavorite}"></i> </span>
+              <span @click="addToFavorites"
+                ><i
+                  class="icon"
+                  :class="{
+                    'fas fa-heart': isFavorite,
+                    'far fa-heart': !isFavorite,
+                  }"
+                ></i>
+              </span>
             </div>
 
             <div v-else>
-            <span @click="toggleModal"><i class="fa-heart icon"></i> </span>
+              <span @click="toggleModal"><i class="fa-heart icon"></i> </span>
             </div>
           </li>
         </ul>
@@ -97,10 +105,10 @@
 <script>
 export default {
   name: "TheRecipeCard",
-  data(){
+  data() {
     return {
-      isFavorite: false
-    }
+      isFavorite: false,
+    };
   },
   props: [
     "title",
@@ -113,26 +121,27 @@ export default {
     "vegetarian",
     "id",
     "instructions",
+    "recipe",
   ],
   methods: {
     toggleModal() {
       this.$store.commit("recipes/toggleModal");
     },
-    addToFavorites(){
+    addToFavorites() {
+      let recipe = this.recipe;
       this.isFavorite = !this.isFavorite;
-      console.log('added')
-    }
+      this.$store.dispatch("users/addRecipe", recipe);
+    },
   },
   computed: {
     showModal() {
       return this.$store.getters["recipes/showModal"];
     },
     isLoggedIn() {
-      return this.$store.getters["users/isLoggedIn"]
-    }, 
+      return this.$store.getters["users/isLoggedIn"];
+    },
     
   },
-
 };
 </script>
 

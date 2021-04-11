@@ -4,7 +4,7 @@
       <h2 class="title">
         Hello,
         <strong>
-          <span v-if="isLoggedIn">{{ getUser.username }}</span>
+          <span v-if="isLoggedIn">{{getUser.username}}</span>
           <span v-else>Chef</span>
         </strong>
       </h2>
