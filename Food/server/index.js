@@ -4,7 +4,6 @@ const bodyparser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const User = require('./models/user');
 const { auth } = require('./middlewares/auth');
-// const db = require('./config/config').get(process.env.NODE_ENV);
 require('dotenv').config();
 
 
@@ -93,7 +92,7 @@ app.get('/api/profile', auth, function (req, res) {
         isAuth: true,
         id: req.user._id,
         email: req.user.email,
-        name: req.user.firstname + req.user.lastname
+        name: req.user.name + req.user.lastname
 
     })
 });
