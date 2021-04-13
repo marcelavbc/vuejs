@@ -5,7 +5,7 @@
         <i class="fas fa-home"></i>
       </router-link>
       <div v-if="isLoggedIn">
-        <router-link to="/favorites">
+        <router-link to="/favorites" @click.native="showFavorites()">
           <i class="far fa-heart"></i>
         </router-link>
       </div>
@@ -25,17 +25,23 @@
 
 <script>
 export default {
-  name: "TheNav",
   computed: {
-    isLoggedIn() {
+    isLoggedIn: function () {
       return this.$store.getters["users/isLoggedIn"];
     },
   },
   methods: {
-    logoutUser() {
+    logoutUser: function () {
+      console.log("out");
       this.$store.dispatch("users/logout").then(() => {
         this.$router.push("/login");
       });
+    },
+    showFavorites() {
+      console.log("favorites clicked");
+      let userId = this.$store.getters["users/getUserId"];
+
+      this.$store.dispatch("recipes/loadFavorites", userId);
     },
   },
 };

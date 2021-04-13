@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Login from '../components/auth/Login.vue'
+import Register from '../components/auth/Register.vue'
+import Recipes from '../views/Recipes.vue'
+import Favorites from '../views/Favorites.vue'
+import Resources from '../components/resources/Resources.vue'
+import RecipeDetails from '../views/RecipeDetails.vue'
+
 import store from '../store/modules/users/index'
 
 
@@ -15,22 +22,22 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+    component: Login
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue'),
+    component: Register
   },
   {
     path: '/recipes',
     name: 'Recipes',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Recipes.vue')
+    component: Recipes
   },
   {
     path: '/favorites',
     name: 'Favorites',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Favorites.vue'),
+    component: Favorites,
     meta: {
       requiresAuth: true
     }
@@ -38,9 +45,18 @@ const routes = [
   {
     path: '/recipes/:id',
     name: 'RecipeDetails',
-    component: () => import(/* webpackChunkName: "about" */ '../views/RecipeDetails.vue'),
+    component: RecipeDetails,
     props: true,
-  }
+  },
+  {
+    path: '/resources',
+    name: 'resources',
+    component: Resources,
+    meta: {
+      requiresAuth: true
+    }
+  },
+
 ]
 
 const router = new VueRouter({
@@ -59,6 +75,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
-})
+});
 
 export default router

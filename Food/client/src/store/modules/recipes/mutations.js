@@ -1,4 +1,7 @@
 export default {
+    getAllRecipes(state, payload){
+        state.recipes = payload
+    },
     changeInput(state, payload) {
         state.input = payload;
     },

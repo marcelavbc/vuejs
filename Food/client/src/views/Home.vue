@@ -4,12 +4,12 @@
       <h2 class="title">
         Hello,
         <strong>
-          <span v-if="isLoggedIn">{{getUser.username}}</span>
+          <span v-if="isLoggedIn">{{getUser}}</span>
           <span v-else>Chef</span>
         </strong>
       </h2>
-      <button @click="showState">click</button>
     </div>
+    <button @click="showState">state</button>
     <main>
       <the-search-bar />
       <the-scroll-menu />
@@ -49,14 +49,15 @@ export default {
       return this.$store.getters["users/isLoggedIn"];
     },
     getUser() {
-      return this.$store.getters["users/user"];
+      return this.$store.getters["users/getUser"];
     },
   },
   methods: {
     showState(){
-      console.log(this.$store.state.users)
+      console.log(this.$store.state)
     }
-  }
+  }, 
+  
 };
 </script>
 

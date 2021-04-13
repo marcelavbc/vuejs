@@ -2,20 +2,24 @@ export default {
     auth_request(state) {
         state.status = 'loading'
     },
-    auth_success(state, {token, user}) {
+    auth_success(state, { token, user }) {
         state.status = 'success'
         state.token = token
         state.user = user
+        state.isLoggedIn = true
     },
     auth_error(state) {
         state.status = 'error'
     },
     logout(state) {
+        state.isLoggedIn = false
         state.status = ''
         state.token = ''
         state.user = {}
     },
-    add_recipe(state, recipe){
-        state.recipes.push(recipe)
+    addRecipe(state, payload) {
+        let recipesArray = [...state.recipes];
+        recipesArray.push(payload)
+        state.recipes = recipesArray
     }
 }

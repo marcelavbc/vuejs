@@ -130,7 +130,9 @@ export default {
     addToFavorites() {
       let recipe = this.recipe;
       this.isFavorite = !this.isFavorite;
-      this.$store.dispatch("users/addRecipe", recipe);
+      let user = this.$store.getters['users/getUserId']
+      console.log(recipe)
+      this.$store.dispatch("users/addToFavorites", {recipe, user});
     },
   },
   computed: {

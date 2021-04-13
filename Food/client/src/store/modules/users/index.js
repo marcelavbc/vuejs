@@ -9,7 +9,8 @@ export default {
         return {
             status: '',
             token: localStorage.getItem('token') || '',
-            user: {},
+            user: {}, 
+            isLoggedIn: false, 
             recipes: []
         }
     },

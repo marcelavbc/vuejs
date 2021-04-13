@@ -13,16 +13,7 @@
 import TheNav from "./components/TheNav";
 export default {
   components: { TheNav },
-  created: function () {
-    this.$http.interceptors.response.use(undefined, function (err) {
-      return new Promise(function () {
-        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-          this.$store.dispatch('users/logout')
-        }
-        throw err;
-      });
-    });
-  }
+  
 };
 </script>
 

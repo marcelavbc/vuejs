@@ -1,30 +1,40 @@
-export default{
-    ingredients(state){
+export default {
+    isLoggedIn(state) {
+        return state.isLoggedIn;
+    },
+    getUser(state){
+        return state.user.username
+    },
+
+
+
+
+    ingredients(state) {
         return state.ingredients
-    }, 
-    ingredientsAreLoading(state){
+    },
+    ingredientsAreLoading(state) {
         return state.loadingIng;
     },
-    hasIngredients(state){
+    hasIngredients(state) {
         return state.ingredients && state.ingredients.length > 0;
-    }, 
-    ingredientsSelected(state){
+    },
+    ingredientsSelected(state) {
         return state.ingredientsSelected;
-    }, 
-    getInputValue(state){
+    },
+    getInputValue(state) {
         return state.input;
-    }, 
-    getSuggestedRecipes(state){
+    },
+    getSuggestedRecipes(state) {
         return state.recipes;
     },
-    isLoading(state){
+    isLoading(state) {
         return state.loading;
-    }, 
-    getRecipeDetails(state){
+    },
+    getRecipeDetails(state) {
         return state.recipeInDetail
-    }, 
-    showModal(state){
+    },
+    showModal(state) {
         return state.showModal
     }
-    
+
 }

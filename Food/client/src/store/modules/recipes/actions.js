@@ -37,8 +37,6 @@ export default {
             params: {
                 ingredients: paramToSearch,
                 number: '20',
-
-
                 ranking: '1',
                 ignorePantry: 'true'
             },
@@ -86,13 +84,23 @@ export default {
         context.state.loading = false
 
         context.commit('loadRecipes', finalRecipes)
-    }, 
-
-    async loadTheRecipeDetail(context, payload){
+    },
+    async loadTheRecipeDetail(context, payload) {
         const recipesArray = context.state.recipes;
         const recipe = await recipesArray.find(recipe => recipe.id === payload)
         console.log(recipe)
         context.commit('loadRecipeDetail', recipe)
+    },
+    loadFavorites({ commit }, userId) {
+        return new Promise((resolve) => {
+            console.log("user", userId)
+            axios({ url: 'http://localhost:4000/api/recipe/' + userId, method: 'GET' })
+                .then((resp) => {
+                    console.log("resp", resp)
+                    commit('getAllRecipes', resp)
+                    resolve()
+                })
+        })
     }
 
 
