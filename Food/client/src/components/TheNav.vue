@@ -5,7 +5,7 @@
         <i class="fas fa-home"></i>
       </router-link>
       <div v-if="isLoggedIn">
-        <router-link to="/favorites" @click.native="showFavorites()">
+        <router-link to="/favorites" @click.native="getRecipes">
           <i class="far fa-heart"></i>
         </router-link>
       </div>
@@ -32,17 +32,16 @@ export default {
   },
   methods: {
     logoutUser: function () {
-      console.log("out");
       this.$store.dispatch("users/logout").then(() => {
+        this.$store.dispatch("recipes/cleanRecipesState")
         this.$router.push("/login");
       });
     },
-    showFavorites() {
-      console.log("favorites clicked");
-      let userId = this.$store.getters["users/getUserId"];
-
-      this.$store.dispatch("recipes/loadFavorites", userId);
-    },
+    getRecipes(){
+      console.log('clicked')
+      let user = this.$store.getters['users/getUserId']
+      this.$store.dispatch("users/getUserRecipes", user)
+    }
   },
 };
 </script>

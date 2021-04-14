@@ -1,7 +1,4 @@
 export default {
-    getAllRecipes(state, payload){
-        state.recipes = payload
-    },
     changeInput(state, payload) {
         state.input = payload;
     },
@@ -20,17 +17,26 @@ export default {
             state.ingredientsSelected.splice(index, 1);
         }
     },
-    loadRecipes(state, payload){
+    loadRecipes(state, payload) {
         state.recipes = payload;
-    }, 
-    loadRecipeDetail(state, payload){
+    },
+    loadRecipeDetail(state, payload) {
         state.recipeInDetail = payload;
-    }, 
-    cleanSelection(state){
+    },
+    cleanSelection(state) {
         state.ingredientsSelected = [];
-    }, 
-    toggleModal(state){
+    },
+    toggleModal(state) {
         state.showModal = !state.showModal;
+    },
+    cleanRecipesState(state) {
+        state.ingredients = []
+        state.ingredientsSelected = []
+        state.input = ''
+        state.recipes = []
+        state.recipeInDetail = {}
+        state.loading = true
+        state.showModal = false
     }
-    
+
 }

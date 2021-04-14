@@ -91,17 +91,20 @@ export default {
         console.log(recipe)
         context.commit('loadRecipeDetail', recipe)
     },
-    loadFavorites({ commit }, userId) {
-        return new Promise((resolve) => {
-            console.log("user", userId)
-            axios({ url: 'http://localhost:4000/api/recipe/' + userId, method: 'GET' })
-                .then((resp) => {
-                    console.log("resp", resp)
-                    commit('getAllRecipes', resp)
-                    resolve()
-                })
-        })
+    cleanRecipesState({commit}){
+        commit('cleanRecipesState')
     }
+    // loadFavorites({ commit }, userId) {
+    //     return new Promise((resolve) => {
+    //         console.log("user", userId)
+    //         axios({ url: 'http://localhost:4000/api/recipe/' + userId, method: 'GET' })
+    //             .then((resp) => {
+    //                 console.log("resp", resp)
+    //                 commit('getAllRecipes', resp)
+    //                 resolve()
+    //             })
+    //     })
+    // }
 
 
 }

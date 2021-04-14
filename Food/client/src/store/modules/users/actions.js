@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
     login({ commit }, user) {
         return new Promise((resolve, reject) => {
-            // commit('auth_request')
+            commit('auth_request')
             axios({ url: 'http://localhost:4000/api/auth/signin', data: user, method: 'POST' })
                 .then(resp => {
                     const token = resp.data.token
@@ -62,4 +62,15 @@ export default {
                 .catch(err => console.log('err', err))
         })
     },
+    getUserRecipes({commit}, user) {
+        console.log(commit)
+        return new Promise((resolve) => {
+            axios({url: 'http://localhost:4000/api/recipe/' + user, data: user, method: 'GET' })
+            .then((resp) => {
+                const recipes = resp.data.recipes
+                commit('getRecipes', recipes)
+                resolve()
+            })
+        })
+    }
 }

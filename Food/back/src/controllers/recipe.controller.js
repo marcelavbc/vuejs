@@ -12,6 +12,6 @@ export const getAllRecipes = async(req, res) => {
     const user = await User.findOne({ _id: req.params.userId });
     const recipes = user.recipes;
     console.log(recipes)
-    res.status(204).json({recipes: recipes});
+    res.json({recipes: recipes});
 }
 

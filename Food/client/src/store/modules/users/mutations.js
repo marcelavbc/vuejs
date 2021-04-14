@@ -21,5 +21,8 @@ export default {
         let recipesArray = [...state.recipes];
         recipesArray.push(payload)
         state.recipes = recipesArray
+    },
+    getRecipes(state, payload){
+        state.recipes = payload
     }
 }
