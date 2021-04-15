@@ -10,7 +10,6 @@ export default {
                     const user = resp.data.user
                     console.log('user', resp.data)
                     localStorage.setItem('token', token)
-                    // Add the following line:
                     axios.defaults.headers.common['Authorization'] = token
                     commit('auth_success', { token, user })
                     resolve(resp)
@@ -55,22 +54,20 @@ export default {
         return new Promise((resolve) => {
             axios({ url: 'http://localhost:4000/api/recipe/' + user, data: recipe, method: 'PUT' })
                 .then(() => {
-                    console.log(recipe);
                     commit('addRecipe', recipe);
                     resolve()
                 })
                 .catch(err => console.log('err', err))
         })
     },
-    getUserRecipes({commit}, user) {
-        console.log(commit)
+    getUserRecipes({ commit }, user) {
         return new Promise((resolve) => {
-            axios({url: 'http://localhost:4000/api/recipe/' + user, data: user, method: 'GET' })
-            .then((resp) => {
-                const recipes = resp.data.recipes
-                commit('getRecipes', recipes)
-                resolve()
-            })
+            axios({ url: 'http://localhost:4000/api/recipe/' + user, data: user, method: 'GET' })
+                .then((resp) => {
+                    const recipes = resp.data.recipes
+                    commit('getRecipes', recipes)
+                    resolve()
+                })
         })
     }
 }

@@ -9,10 +9,9 @@
         </strong>
       </h2>
     </div>
-    <button @click="showState">state</button>
     <main>
       <the-search-bar />
-      <the-scroll-menu />
+      <ingredients-list></ingredients-list>
       <ingredients-selected-box />
       <div v-if="selectedIngredients.length > 0">
         <div class="buttons">
@@ -25,9 +24,8 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import TheSearchBar from "../components/TheSearchBar";
-import TheScrollMenu from "../components/ingredients/TheScrollMenu";
+import IngredientsList from "../components/ingredients/IngredientsList";
 import IngredientsSelectedBox from "../components/ingredients/IngredientsSelectedBox";
 import TheCookButton from "../components/buttons/TheCookButton";
 import TheCleanButton from "../components/buttons/TheCleanButton";
@@ -36,7 +34,7 @@ export default {
   name: "Home",
   components: {
     TheSearchBar,
-    TheScrollMenu,
+    IngredientsList,
     IngredientsSelectedBox,
     TheCookButton,
     TheCleanButton,
@@ -52,19 +50,12 @@ export default {
       return this.$store.getters["users/getUser"];
     },
   },
-  methods: {
-    showState(){
-      console.log(this.$store.state)
-    }
-  }, 
-  
 };
 </script>
 
 <style lang="scss" >
 .home {
-  margin: 4rem 1rem 0;
-  height: 100vh;
+  margin: 3.4rem 1rem;
   .header {
     .title {
       font-weight: 300;
@@ -88,7 +79,7 @@ export default {
         border-radius: 1rem;
         min-height: 90px;
         display: flex;
-        padding: 0.5rem;
+        padding: 0.4rem;
 
         .ingredient {
           padding: 1rem;

@@ -1,7 +1,7 @@
 <template>
   <div class="ingredient-box">
     <h4>Ingredients Selected:</h4>
-    <div class="box-content selected-box">
+    <div class="box-content scroll-content">
       <div
         class="ingredient"
         v-for="(item, index) in selectedIngredients"
@@ -40,6 +40,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-</style>

@@ -3,7 +3,7 @@ export default {
         state.input = payload;
     },
     addIngredientToList(state, payload) {
-        state.ingredientsSelected.push(payload);
+        state.ingredientsSelected.unshift(payload);
     },
     cleanIngredientsList(state) {
         state.ingredients = [];

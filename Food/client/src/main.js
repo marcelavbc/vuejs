@@ -7,6 +7,8 @@ import LoadingSpinner from './components/utils/LoadingSpinner'
 import Appear from './components/utils/Appear'
 import AlertModal from './components/utils/AlertModal'
 import TheRegisterForm from './components/utils/TheRegisterForm'
+import TheRecipeCard from './components/TheRecipeCard'
+
 
 import axios from 'axios'
 
@@ -26,6 +28,7 @@ Vue.component('loading-spinner', LoadingSpinner)
 Vue.component('appear', Appear)
 Vue.component('alert-modal', AlertModal)
 Vue.component('the-register-form', TheRegisterForm)
+Vue.component('the-recipe-card', TheRecipeCard)
 
 
 

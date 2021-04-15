@@ -1,9 +1,21 @@
 <template>
   <div class="favorites">
     <h3>Favorites</h3>
-    
+
     <div v-for="(recipe, index) in getAllRecipes" :key="index">
-      <p>{{recipe.title}}</p>
+      <the-recipe-card
+        :title="recipe.title"
+        :image="recipe.image"
+        :dish="recipe.dishTypes[0]"
+        :readyInMinutes="recipe.readyInMinutes"
+        :servings="recipe.servings"
+        :missedIngredients="recipe.missedIngredients"
+        :usedIngredients="recipe.usedIngredients"
+        :vegetarian="recipe.vegetarian"
+        :id="recipe.id"
+        :recipe="recipe"
+        :isFavorite="recipe.isFavorite"
+      ></the-recipe-card>
     </div>
   </div>
 </template>

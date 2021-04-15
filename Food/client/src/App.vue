@@ -13,7 +13,6 @@
 import TheNav from "./components/TheNav";
 export default {
   components: { TheNav },
-  
 };
 </script>
 
@@ -30,9 +29,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-
-  .top-margin {
-    margin-top: 3rem;
+  .main {
+      margin: 3rem 0 0 0;
   }
 }
 </style>

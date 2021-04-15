@@ -8,7 +8,7 @@ export default {
             method: "GET",
             url:
                 "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete",
-            params: { number: "15", query: newValue },
+            params: { number: "6", query: newValue },
             headers: {
                 'x-rapidapi-key': process.env.VUE_APP_SPOONCULAR_API_KEY,
                 "x-rapidapi-host":
@@ -25,7 +25,6 @@ export default {
     },
     async loadTheRecipes(context) {
         context.state.loading = true;
-
         const params = context.state.ingredientsSelected;
         const ingrNames = []
         params.forEach(obj => ingrNames.push(obj.name))
@@ -81,8 +80,20 @@ export default {
                 }
             }
         }
-        context.state.loading = false
 
+        const favoriteArray = context.rootState.users.user.recipes;
+        
+        for (let i = 0; i < finalRecipes.length; i++) {
+            for (let j = 0; j < favoriteArray.length; j++) {
+                if (finalRecipes[i].id === favoriteArray[j].id) {
+                    console.log(finalRecipes[i].id)
+                    finalRecipes[i].isFavorite = true
+                }
+            }
+        }
+        context.state.loading = false
+        console.log(finalRecipes)
+        console.log('state', context.rootState.users.user.recipes)
         context.commit('loadRecipes', finalRecipes)
     },
     async loadTheRecipeDetail(context, payload) {
@@ -94,17 +105,4 @@ export default {
     cleanRecipesState({commit}){
         commit('cleanRecipesState')
     }
-    // loadFavorites({ commit }, userId) {
-    //     return new Promise((resolve) => {
-    //         console.log("user", userId)
-    //         axios({ url: 'http://localhost:4000/api/recipe/' + userId, method: 'GET' })
-    //             .then((resp) => {
-    //                 console.log("resp", resp)
-    //                 commit('getAllRecipes', resp)
-    //                 resolve()
-    //             })
-    //     })
-    // }
-
-
 }

@@ -5,10 +5,9 @@ export default {
     getUser(state){
         return state.user.username
     },
-
-
-
-
+    isFavorite(state) {
+        return state.recipes
+    },
     ingredients(state) {
         return state.ingredients
     },

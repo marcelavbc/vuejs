@@ -38,7 +38,6 @@ export default {
       });
     },
     getRecipes(){
-      console.log('clicked')
       let user = this.$store.getters['users/getUserId']
       this.$store.dispatch("users/getUserRecipes", user)
     }

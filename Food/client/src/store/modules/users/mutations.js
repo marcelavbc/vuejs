@@ -19,6 +19,9 @@ export default {
     },
     addRecipe(state, payload) {
         let recipesArray = [...state.recipes];
+        console.log(recipesArray)
+        console.log('payload', payload)
+
         recipesArray.push(payload)
         state.recipes = recipesArray
     },

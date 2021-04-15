@@ -42,19 +42,12 @@
 
           <li class="save-recipe-icon">
             <div v-if="isLoggedIn">
-              <span @click="addToFavorites"
-                ><i
-                  class="icon"
-                  :class="{
-                    'fas fa-heart': isFavorite,
-                    'far fa-heart': !isFavorite,
-                  }"
-                ></i>
+              <span @click="addToFavorites">
+                <i :class="[active ? 'fas' : 'far', 'icon fa-heart']"></i>
               </span>
             </div>
-
             <div v-else>
-              <span @click="toggleModal"><i class="fa-heart icon"></i> </span>
+              <span @click="toggleModal"><i class="fas-heart icon"></i> </span>
             </div>
           </li>
         </ul>
@@ -107,7 +100,7 @@ export default {
   name: "TheRecipeCard",
   data() {
     return {
-      isFavorite: false,
+      active: this.isFavorite
     };
   },
   props: [
@@ -122,6 +115,7 @@ export default {
     "id",
     "instructions",
     "recipe",
+    "isFavorite",
   ],
   methods: {
     toggleModal() {
@@ -129,10 +123,10 @@ export default {
     },
     addToFavorites() {
       let recipe = this.recipe;
-      this.isFavorite = !this.isFavorite;
-      let user = this.$store.getters['users/getUserId']
-      console.log(recipe)
-      this.$store.dispatch("users/addToFavorites", {recipe, user});
+      recipe.isFavorite = !recipe.isFavorite;
+      this.active = !this.active;
+      let user = this.$store.getters["users/getUserId"];
+      this.$store.dispatch("users/addToFavorites", { recipe, user });
     },
   },
   computed: {
@@ -142,7 +136,6 @@ export default {
     isLoggedIn() {
       return this.$store.getters["users/isLoggedIn"];
     },
-    
   },
 };
 </script>
@@ -153,9 +146,9 @@ export default {
   margin: 1rem;
   width: 90%;
   max-width: 496px;
-  .img-container {
-    position: relative;
-  }
+  // .img-container {
+  //   position: relative;
+  // }
   img {
     max-width: 100%;
     height: auto;
