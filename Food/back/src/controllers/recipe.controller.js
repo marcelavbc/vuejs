@@ -4,7 +4,9 @@ export const updateUserById = async (req, res) => {
     const user = await User.findOne({ _id: req.params.userId });
     const recipes = user.recipes;
     const theRecipe = req.body.id;
-    let isFavorite = recipes.find(recipe => recipe.id === theRecipe);
+    let isFavorite = await recipes.find(recipe => recipe.id === theRecipe);
+    let index = await recipes.indexOf(isFavorite)
+
     if (!isFavorite) {
         const updatedUser = await User.findByIdAndUpdate(
             { _id: req.params.userId },
@@ -12,9 +14,10 @@ export const updateUserById = async (req, res) => {
         );
         res.status(204).json(updatedUser);
     } else {
+        console.log('need to quit')
         const updatedUser = await User.findByIdAndUpdate(
             { _id: req.params.userId },
-            { $pull: { recipes: req.body } }
+            { $pull: { recipes: isFavorite } }
         );
         res.status(204).json(updatedUser);
     }

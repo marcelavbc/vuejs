@@ -51,22 +51,21 @@ export default {
       this.$store.dispatch("recipes/loadTheRecipeDetail", id);
     },
   },
-  
 };
 </script>
 
 <style lang="scss" scoped>
 .recipes {
-  margin: 3rem 0;
+  margin: 3rem 0 0 0;
   .recipes-list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: rgba(250, 248, 248);
     .details {
-      position: absolute;
-      bottom: 8px;
-      right: 22px;
+      position: relative;
+      left: 250px;
+      bottom: 40px;
       font-size: 1rem;
       color: rgba(255, 131, 62);
       border: 1px solid rgba(255, 131, 62);

@@ -2,9 +2,7 @@
   <div class="small-card-container">
     <alert-modal>
       <div v-if="showModal" class="modal-container">
-        <transition name="fade">
-          <div v-if="showModal" class="modal-overlay"></div>
-        </transition>
+        
         <transition name="fade">
           <div v-if="showModal" class="modal">
             <p class="info-modal">
@@ -12,7 +10,9 @@
             </p>
             <div class="buttons-div">
               <button @click="toggleModal">Back</button>
-              <button @click="toggleModal">Login</button>
+              <router-link to="/login">
+                <button @click="toggleModal">Login</button>
+              </router-link>
             </div>
           </div>
         </transition>
@@ -47,7 +47,9 @@
               </span>
             </div>
             <div v-else>
-              <span @click="toggleModal"><i class="fas-heart icon"></i> </span>
+              <span @click="toggleModal"
+                ><i class="far fa-heart icon"></i>
+              </span>
             </div>
           </li>
         </ul>
@@ -100,7 +102,8 @@ export default {
   name: "TheRecipeCard",
   data() {
     return {
-      active: this.isFavorite
+      active: this.isFavorite,
+      modal: true,
     };
   },
   props: [
@@ -141,126 +144,118 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.recipe-card {
-  background: #fff;
-  margin: 1rem;
-  width: 90%;
-  max-width: 496px;
-  // .img-container {
-  //   position: relative;
-  // }
-  img {
-    max-width: 100%;
-    height: auto;
-    vertical-align: bottom;
-  }
-  article {
-    padding: 1.5rem 1.5rem;
-
-    h3,
-    h4 {
-      margin: 0;
-      font-weight: 300;
+.small-card-container {
+  .recipe-card {
+    background: #fff;
+    margin: 1rem;
+    width: 90%;
+    max-width: 496px;
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: bottom;
     }
+    article {
+      padding: 1rem 1.5rem 1.5rem 1.5rem;
 
-    h4 {
-      color: #838689;
-    }
-
-    ul {
-      list-style: none;
-      margin: 0.5rem 0 0;
-      padding: 0;
-      li {
-        display: inline-block;
-        margin-left: 0.6rem;
-        line-height: 1rem;
-        &:first-child {
-          margin-left: 0;
-        }
-
-        .icon {
-          vertical-align: bottom;
-          display: inline;
-          color: rgba(255, 131, 62);
-        }
-        span:nth-of-type(2) {
-          margin-left: 0.3rem;
-          font-size: 0.8rem;
-          font-weight: 300;
-          vertical-align: middle;
-          color: #838689;
-        }
+      h3,
+      h4 {
+        margin: 0;
+        font-weight: 300;
       }
-    }
 
-    .ingredients {
-      margin: 1rem 0 0.5rem;
+      h4 {
+        color: #838689;
+      }
 
-      .recipe-info {
-        margin-bottom: 1rem;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-        .info-text {
+      ul {
+        list-style: none;
+        margin: 0.5rem 0 0;
+        padding: 0;
+        li {
           display: inline-block;
-          margin-top: 0.5rem;
-        }
-        .separator {
-          color: rgba(255, 131, 62);
-          font-weight: 400;
-          margin: 0 0.2rem;
-        }
-      }
-    }
-    .instructions {
-      margin: 1rem 0 0.5rem;
-      .instructions-info {
-        margin-top: 0.5rem;
-        h4 {
-          line-height: 1.3rem;
-        }
-      }
-    }
-  }
-}
-.modal-container {
-  .modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.1);
-  }
+          margin-left: 0.6rem;
+          line-height: 1rem;
+          &:first-child {
+            margin-left: 0;
+          }
 
-  .modal {
-    position: fixed;
-    width: 80%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    z-index: 101;
-    border-radius: 8px;
-    .info-modal {
-      text-align: center;
-      line-height: 1.4rem;
+          .icon {
+            vertical-align: bottom;
+            display: inline;
+            color: rgba(255, 131, 62);
+          }
+          span:nth-of-type(2) {
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+            font-weight: 300;
+            vertical-align: middle;
+            color: #838689;
+          }
+        }
+      }
+
+      .ingredients {
+        margin: 1rem 0 0.5rem;
+
+        .recipe-info {
+          margin-bottom: 1rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+          .info-text {
+            display: inline-block;
+            margin-top: 0.5rem;
+          }
+          .separator {
+            color: rgba(255, 131, 62);
+            font-weight: 400;
+            margin: 0 0.2rem;
+          }
+        }
+      }
+      .instructions {
+        margin: 1rem 0 0.5rem;
+        .instructions-info {
+          margin-top: 0.5rem;
+          h4 {
+            line-height: 1.3rem;
+          }
+        }
+      }
     }
-    .buttons-div {
-      display: flex;
-      width: 100%;
-      justify-content: space-around;
-      margin-top: 0.7rem;
-      button {
-        padding: 8px;
-        border: none;
-        border-radius: 2px;
-        background: #ff833e;
-        color: rgba(250, 248, 248);
+  }
+  .modal-container {
+
+    .modal {
+      position: fixed;
+      width: 80%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ff833e;
+      padding: 20px;
+      z-index: 101;
+      border-radius: 8px;
+      color: rgba(250, 248, 248);
+
+      .info-modal {
+        text-align: center;
+        line-height: 1.4rem;
+      }
+      .buttons-div {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        margin-top: 0.7rem;
+        button {
+          padding: 8px;
+          border: none;
+          border-radius: 2px;
+          color: #ff833e;
+          background: rgba(250, 248, 248);
+        }
       }
     }
   }

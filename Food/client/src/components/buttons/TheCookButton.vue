@@ -1,18 +1,32 @@
 <template>
   <appear :delay="100" :translate="['-50px', 0]">
-  <router-link to="/recipes">
-    <button class="cook-button" @click="getRecipes">Find recipes</button>
-  </router-link>
+    <router-link to="/recipes">
+      <div v-if="isLoggedIn">
+        <button class="cook-button" @click="getRecipes">Find recipes</button>
+      </div>
+      <div v-else>
+        <button class="cook-button" @click="notLogGetRecipes">
+          Find recipes
+        </button>
+      </div>
+    </router-link>
   </appear>
 </template>
 
 <script>
 export default {
   name: "TheCookButton",
-
   methods: {
     getRecipes() {
       this.$store.dispatch("recipes/loadTheRecipes", "array");
+    },
+    notLogGetRecipes() {
+      this.$store.dispatch("recipes/loadTheRecipesNotLogg", "array");
+    },
+  },
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters["users/isLoggedIn"];
     },
   },
 };
