@@ -25,7 +25,6 @@ export default {
         this.$store.commit("recipes/changeInput", value);
       },
     },
-    
   },
   methods: {
     getIngredient(event) {
@@ -49,6 +48,10 @@ export default {
     padding: 0.7rem;
     padding-left: 2rem;
     border-radius: 10px;
+    @media only screen and (min-width: 768px) {
+      padding: 1.2rem 1.2rem 1.2rem 2rem;
+      font-size:1rem;
+    }
   }
   .icon-input {
     position: absolute;

@@ -4,7 +4,7 @@
       <h2 class="title">
         Hello,
         <strong>
-          <span v-if="isLoggedIn">{{getUser}}</span>
+          <span v-if="isLoggedIn">{{ getUser }}</span>
           <span v-else>Chef</span>
         </strong>
       </h2>
@@ -56,12 +56,22 @@ export default {
 <style lang="scss" >
 .home {
   margin: 3.4rem 1rem;
+  @media only screen and (min-width: 768px) {
+    margin: 2rem 1rem;
+    width: 60%;
+  }
   .header {
     .title {
       font-weight: 300;
+      @media only screen and (min-width: 768px) {
+        font-size: 1.9rem;
+      }
     }
   }
   main {
+    @media only screen and (min-width: 768px) {
+      font-size: 1.2rem;
+    }
     .ingredient-box {
       margin-top: 1rem;
       .scroll-content {
@@ -80,6 +90,9 @@ export default {
         min-height: 90px;
         display: flex;
         padding: 0.4rem;
+        @media only screen and (min-width: 768px) {
+          min-height: 150px;
+        }
 
         .ingredient {
           padding: 1rem;
@@ -91,6 +104,10 @@ export default {
           background-color: white;
           width: 70px;
           height: 70px;
+          @media only screen and (min-width: 768px) {
+            width: 100px;
+            height: 100px;
+          }
         }
       }
     }

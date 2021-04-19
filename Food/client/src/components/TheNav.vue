@@ -33,14 +33,14 @@ export default {
   methods: {
     logoutUser: function () {
       this.$store.dispatch("users/logout").then(() => {
-        this.$store.dispatch("recipes/cleanRecipesState")
+        this.$store.dispatch("recipes/cleanRecipesState");
         this.$router.push("/login");
       });
     },
-    getRecipes(){
-      let user = this.$store.getters['users/getUserId']
-      this.$store.dispatch("users/getUserRecipes", user)
-    }
+    getRecipes() {
+      let user = this.$store.getters["users/getUserId"];
+      this.$store.dispatch("users/getUserRecipes", user);
+    },
   },
 };
 </script>
@@ -48,21 +48,31 @@ export default {
 <style lang="scss" >
 #nav {
   .nav-container {
-    width: 100%;
+    width: 100vw;
     height: 3rem;
     position: fixed;
     top: 0;
     background-color: rgba(250, 248, 248);
     margin-bottom: 1rem;
+    @media only screen and (min-width: 768px) {
+      height: 4rem;
+      display: flex;
+    }
     .nav-content {
       display: flex;
       justify-content: space-between;
       padding: 1em;
+      border: 1px solid green;
+      width: 100%;
+
       a {
         font-weight: bold;
         color: rgba(163, 163, 163);
         &.router-link-exact-active {
           color: #ff833e;
+        }
+        @media only screen and (min-width: 768px) {
+          font-size: 1.3rem;
         }
       }
     }

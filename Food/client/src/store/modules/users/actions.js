@@ -4,11 +4,11 @@ export default {
     login({ commit }, user) {
         return new Promise((resolve, reject) => {
             commit('auth_request')
-            axios({ url: 'http://localhost:4000/api/auth/signin', data: user, method: 'POST' })
+            axios({ url: 'http://localhost:3000/api/user/login', data: user, method: 'POST' })
                 .then(resp => {
-                    const token = resp.data.token
-                    const user = resp.data.user
-                    console.log('user', resp.data)
+                    console.log(resp)
+                    const token = resp.data.data.token
+                    const user = resp.data.data.user
                     localStorage.setItem('token', token)
                     axios.defaults.headers.common['Authorization'] = token
                     commit('auth_success', { token, user })
@@ -24,11 +24,11 @@ export default {
     register({ commit }, user) {
         return new Promise((resolve, reject) => {
             commit('auth_request')
-            axios({ url: 'http://localhost:4000/api/auth/signup', data: user, method: 'POST' })
+            axios({ url: 'http://localhost:3000/api/user/register', data: user, method: 'POST' })
                 .then(resp => {
+                    console.log(resp)
                     const token = resp.data.token
                     const user = resp.data.user
-                    console.log(resp.data)
                     localStorage.setItem('token', token)
                     axios.defaults.headers.common['Authorization'] = token
                     commit('auth_success', { token, user })
@@ -52,7 +52,7 @@ export default {
     },
     addToFavorites({ commit }, { recipe, user }) {
         return new Promise((resolve) => {
-            axios({ url: 'http://localhost:4000/api/recipe/' + user, data: recipe, method: 'PUT' })
+            axios({ url: 'http://localhost:3000/api/favorites/' + user, data: recipe, method: 'PUT' })
                 .then(() => {
                     commit('addRecipe', recipe);
                     resolve()
@@ -62,7 +62,7 @@ export default {
     },
     getUserRecipes({ commit }, user) {
         return new Promise((resolve) => {
-            axios({ url: 'http://localhost:4000/api/recipe/' + user, data: user, method: 'GET' })
+            axios({ url: 'http://localhost:3000/api/favorites/' + user, data: user, method: 'GET' })
                 .then((resp) => {
                     const recipes = resp.data.recipes
                     commit('getRecipes', recipes)

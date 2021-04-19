@@ -11,10 +11,13 @@
 export default {};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 article {
   height: calc(100vh - 3rem);
   display: flex;
+  @media only screen and (min-width: 768px) {
+    width: 100vw;
+  }
 }
 .lds-ripple {
   position: relative;

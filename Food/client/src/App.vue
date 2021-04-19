@@ -30,7 +30,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   .main {
-      margin: 3rem 0 0 0;
+    margin: 3rem 0 0 0;
+    @media only screen and (min-width: 768px) {
+      margin: 4rem 0 0 0;
+      display: flex;
+      justify-content:center;
+    }
   }
 }
 </style>

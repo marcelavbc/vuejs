@@ -56,12 +56,12 @@ export default {
 
 <style lang="scss" scoped>
 .recipes {
-  margin: 3rem 0 0 0;
   .recipes-list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: rgba(250, 248, 248);
+    
     .details {
       position: relative;
       left: 250px;
