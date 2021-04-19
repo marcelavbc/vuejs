@@ -24,7 +24,7 @@ export default {
         let index = recipesArray.indexOf(payload);
         console.log('index', index)
         for (let i = 0; i < recipesArray.length; i++) {
-            if(recipesArray[i].id !== payload.id){
+            if (recipesArray[i].id !== payload.id) {
                 recipesArray.push(payload)
                 console.log(recipesArray)
             } else {

@@ -31,8 +31,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .details-container {
-  margin: 4rem 1rem 0;
+  margin: 3rem 1rem 0;
 }
 </style>

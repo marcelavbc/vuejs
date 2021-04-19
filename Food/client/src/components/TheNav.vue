@@ -62,7 +62,6 @@ export default {
       display: flex;
       justify-content: space-between;
       padding: 1em;
-      border: 1px solid green;
       width: 100%;
 
       a {

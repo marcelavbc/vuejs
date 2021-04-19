@@ -2,7 +2,6 @@
   <div class="small-card-container">
     <alert-modal>
       <div v-if="showModal" class="modal-container">
-        
         <transition name="fade">
           <div v-if="showModal" class="modal">
             <p class="info-modal">
@@ -145,6 +144,9 @@ export default {
 
 <style lang="scss" scoped>
 .small-card-container {
+  @media only screen and (min-width: 768px) {
+    font-size: 1.2rem;
+  }
   .recipe-card {
     background: #fff;
     margin: 1rem;
@@ -227,7 +229,6 @@ export default {
     }
   }
   .modal-container {
-
     .modal {
       position: fixed;
       width: 80%;
@@ -239,7 +240,11 @@ export default {
       z-index: 101;
       border-radius: 8px;
       color: rgba(250, 248, 248);
-
+      @media only screen and (min-width: 768px) {
+        font-size: 1.2rem;
+        width: 30%;
+        padding: 30px;
+      }
       .info-modal {
         text-align: center;
         line-height: 1.4rem;

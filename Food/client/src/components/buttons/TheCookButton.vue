@@ -18,10 +18,10 @@ export default {
   name: "TheCookButton",
   methods: {
     getRecipes() {
-      this.$store.dispatch("recipes/loadTheRecipes", "array");
+      this.$store.dispatch("recipes/loadTheRecipes");
     },
     notLogGetRecipes() {
-      this.$store.dispatch("recipes/loadTheRecipesNotLogg", "array");
+      this.$store.dispatch("recipes/loadTheRecipesNotLogg");
     },
   },
   computed: {

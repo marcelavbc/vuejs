@@ -56,12 +56,15 @@ export default {
 
 <style lang="scss" scoped>
 .recipes {
+  @media only screen and (min-width: 768px) {
+    font-size: 1.2rem;
+  }
   .recipes-list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: rgba(250, 248, 248);
-    
+
     .details {
       position: relative;
       left: 250px;
@@ -72,6 +75,9 @@ export default {
       border-radius: 50%;
       padding: 0.5rem;
       background-color: rgba(250, 248, 248);
+      @media only screen and (min-width: 768px) {
+        left: 90%;
+      }
     }
   }
 }

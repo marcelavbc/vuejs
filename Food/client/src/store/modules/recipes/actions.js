@@ -76,23 +76,24 @@ export default {
                     finalRecipes[i].missedIngredientCount = suggestedRecipes[j].missedIngredientCount;
                     finalRecipes[i].missedIngredients = suggestedRecipes[j].missedIngredients;
                     finalRecipes[i].usedIngredients = suggestedRecipes[j].usedIngredients;
-
                 }
             }
+
         }
 
         const favoriteArray = context.rootState.users.user.recipes;
+        console.log('favorite', favoriteArray)
         
         for (let i = 0; i < finalRecipes.length; i++) {
             for (let j = 0; j < favoriteArray.length; j++) {
                 if (finalRecipes[i].id === favoriteArray[j].id) {
                     console.log(finalRecipes[i].id)
+                    console.log('isfavorite')
                     finalRecipes[i].isFavorite = true
-                } else {
-                    finalRecipes[i].isFavorite = false
-                }
+                } 
             }
         }
+
         context.state.loading = false
         context.commit('loadRecipes', finalRecipes)
     },
@@ -149,10 +150,21 @@ export default {
                     finalRecipes[i].missedIngredientCount = suggestedRecipes[j].missedIngredientCount;
                     finalRecipes[i].missedIngredients = suggestedRecipes[j].missedIngredients;
                     finalRecipes[i].usedIngredients = suggestedRecipes[j].usedIngredients;
-
                 }
             }
         }
+
+        const favoriteArray = context.rootState.users.user.recipes;
+        
+        for (let i = 0; i < finalRecipes.length; i++) {
+            for (let j = 0; j < favoriteArray.length; j++) {
+                if (finalRecipes[i].id === favoriteArray[j].id) {
+                    console.log(finalRecipes[i].id)
+                    finalRecipes[i].isFavorite = true
+                } 
+            }
+        }
+
         context.state.loading = false
         context.commit('loadRecipes', finalRecipes)
     },

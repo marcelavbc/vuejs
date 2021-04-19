@@ -65,6 +65,7 @@ export default {
             axios({ url: 'http://localhost:3000/api/favorites/' + user, data: user, method: 'GET' })
                 .then((resp) => {
                     const recipes = resp.data.recipes
+                    console.log('recipes', resp.data.recipes)
                     commit('getRecipes', recipes)
                     resolve()
                 })

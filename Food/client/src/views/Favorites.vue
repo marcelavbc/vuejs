@@ -27,6 +27,15 @@ export default {
       return this.$store.getters["users/getAllFavorites"];
     },
   },
+  methods: {
+    getRecipes() {
+      return this.$store.getters["users/getAllFavorites"];
+    },
+  },
+  beforeMount(){
+    console.log('before')
+    this.getRecipes()
+  }
 };
 </script>
 

@@ -22,8 +22,8 @@ export default {};
   .container {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height:100%;
+    width: 100vw;
+    height: 100%;
     align-items: center;
     padding: 30px;
     justify-content: space-around;
@@ -36,8 +36,10 @@ export default {};
         padding: 0.6rem;
         border: none;
         border-radius: 8px;
+        @media only screen and (min-width: 768px) {
+        font-size: 1.1rem;
       }
-
+      }
       .btn {
         width: 60%;
         color: white;
@@ -46,6 +48,9 @@ export default {};
     }
     .link {
       color: black;
+      @media only screen and (min-width: 768px) {
+        font-size: 1.2rem;
+      }
     }
   }
 }
