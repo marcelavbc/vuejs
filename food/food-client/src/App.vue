@@ -1,13 +1,19 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <nav-bar></nav-bar>
     </div>
     <router-view />
   </div>
 </template>
 
+<script>
+import NavBar from "../src/components/navbar/NavBar"
+export default {
+  components: {NavBar}
+  
+}
+</script>
 <style lang="scss">
 * {
   box-sizing: border-box;
@@ -20,6 +26,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+
+
+  
 
 // #nav {
 //   padding: 30px;

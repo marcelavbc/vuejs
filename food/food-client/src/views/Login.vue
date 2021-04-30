@@ -2,7 +2,7 @@
   <div>
     <the-form>
       <div class="container">
-        <h2>Create Your Account</h2>
+        <h2>Let's cook!</h2>
         <form @submit.prevent="login(user)">
           <div class="inputs">
             <input

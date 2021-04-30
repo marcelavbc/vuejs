@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 import router from '../router/index'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -10,12 +10,25 @@ export default new Vuex.Store({
     user: {
       data: {},
       status: '',
-      errorMessage: ''
+      errorMessage: '',
+      isLoggedIn: false
+    },
+    ingredients: {
+      input: ''
     }
   },
   getters: {
     getError(state) {
       return state.user.errorMessage
+    },
+    isLoggedIn(state) {
+      return state.user.isLoggedIn;
+    },
+    getUser(state) {
+      return state.user.data;
+    },
+    getSearchInput(state) {
+      return state.ingredients.input
     }
   },
   mutations: {
@@ -24,15 +37,20 @@ export default new Vuex.Store({
       state.user.token = token;
       state.user.data = user;
       state.user.errorMessage = '';
+      state.user.isLoggedIn = true
     },
     auth_error(state, error) {
       state.user.status = 'error';
-      state.user.errorMessage = error
+      state.user.errorMessage = error;
     },
     logout(state) {
-      state.user.status = ''
-      state.user.token = ''
-      state.user.data = {}
+      state.user.status = '';
+      state.user.token = '';
+      state.user.data = {};
+      state.user.isLoggedIn = false
+    },
+    setInput(state, newInput) {
+      state.ingredients.input = newInput;
     }
   },
   actions: {
@@ -110,6 +128,12 @@ export default new Vuex.Store({
       commit('logout')
       localStorage.removeItem('token')
       delete axios.defaults.headers.common['Authorization']
+    },
+    SET_INPUT(context, newInput) {
+      context.commit("setInput", newInput)
+      console.log(newInput)
+      
+
     }
   },
   modules: {
