@@ -2,9 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import TheForm from '../src/components/utils/TheForm.vue'
 import axios from 'axios'
 
+import TheForm from '../src/components/utils/TheForm.vue'
+import IngredientImage from '../src/components/utils/IngredientImage.vue'
 
 Vue.config.productionTip = false
 
@@ -16,6 +17,8 @@ if (accessToken) {
 }
 
 Vue.component('the-form', TheForm)
+Vue.component('ingredient-image', IngredientImage)
+
 
 new Vue({
   router,

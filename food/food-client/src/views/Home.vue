@@ -11,17 +11,23 @@
     </div>
     <div class="main">
       <search-bar></search-bar>
+      <ingredients-list></ingredients-list>
+      <ingredients-selected></ingredients-selected>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import IngredientsList from '../components/spooncular/IngredientsList';
+import IngredientsSelected from '../components/spooncular/IngredientsSelected.vue';
 import SearchBar from '../components/utils/SearchBar.vue';
 export default {
   name: "Home",
   components: {
-    SearchBar
+    SearchBar,
+    IngredientsList,
+    IngredientsSelected
   },
   computed: {
     ...mapGetters(["getUser", "isLoggedIn"]),
@@ -44,7 +50,7 @@ export default {
       }
     }
   }
-  main {
+  .main {
     @media only screen and (min-width: 768px) {
       font-size: 1.2rem;
     }

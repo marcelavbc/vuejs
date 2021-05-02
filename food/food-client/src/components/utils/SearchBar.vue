@@ -3,7 +3,7 @@
     <input
       type="text"
       placeholder="Type to search"
-      @keyup="$event = $store.commit('setInput', $event.target.value)"
+      @keyup="loadTheIngredients($event)"
       v-model="input"
     />
     <div class="icon-input">
@@ -18,7 +18,8 @@ export default {
   name: "TheSearchBar",
   methods: {
     ...mapGetters(["getSearchInput"]),
-    ...mapActions(["SET_INPUT"]),
+    ...mapActions(["SET_INPUT", 'loadTheIngredients']),
+
   },
   computed: {
     input: {
