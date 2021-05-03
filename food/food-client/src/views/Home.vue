@@ -13,25 +13,35 @@
       <search-bar></search-bar>
       <ingredients-list></ingredients-list>
       <ingredients-selected></ingredients-selected>
+      <div class="buttons">
+        <the-button @click.native="loadRecipes">Cook</the-button>
+        <the-button @click.native="cleanIngredients">Clean</the-button>
+      </div>
+
+      <div v-if="getSelectedIngredients.length"></div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import IngredientsList from '../components/spooncular/IngredientsList';
-import IngredientsSelected from '../components/spooncular/IngredientsSelected.vue';
-import SearchBar from '../components/utils/SearchBar.vue';
+import { mapGetters, mapActions } from "vuex";
+import IngredientsList from "../components/spooncular/IngredientsList";
+import IngredientsSelected from "../components/spooncular/IngredientsSelected.vue";
+import SearchBar from "../components/utils/SearchBar.vue";
+
 export default {
   name: "Home",
   components: {
     SearchBar,
     IngredientsList,
-    IngredientsSelected
+    IngredientsSelected,
   },
   computed: {
-    ...mapGetters(["getUser", "isLoggedIn"]),
+    ...mapGetters(["getUser", "isLoggedIn", "getSelectedIngredients"]),
   },
+  methods: {
+    ...mapActions(["loadRecipes", "cleanIngredients"]), 
+  }
 };
 </script>
 

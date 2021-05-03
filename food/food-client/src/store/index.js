@@ -16,16 +16,15 @@ export default new Vuex.Store({
     recipes: {
       ingredientInput: '',
       ingredients: [],
-      ingredientsSelected: []
+      ingredientsSelected: [],
+      recipesFound: []
     },
 
   },
   getters: {
     getState(state) {
       return state.recipes
-
     },
-
     getError(state) {
       return state.user.errorMessage
     },
@@ -43,6 +42,9 @@ export default new Vuex.Store({
     },
     getSelectedIngredients(state) {
       return state.recipes.ingredientsSelected
+    }, 
+    getSuggestedRecipes(state){
+      return state.recipes.recipesFound
     }
 
   },
@@ -77,6 +79,9 @@ export default new Vuex.Store({
     },
     deleteIngredient(state, index) {
       state.recipes.ingredientsSelected.splice(index, 1);
+    },
+    getRecipes(state, payload) {
+      state.recipes.recipesFound = payload;
     }
 
 
@@ -191,11 +196,68 @@ export default new Vuex.Store({
     },
     deleteIngredient({ commit }, payload) {
       let index = this.state.recipes.ingredientsSelected.findIndex(element => element === payload)
-      if (index > -1) {
-        commit('deleteIngredient', index)
-      }
-    }
+      commit('deleteIngredient', index)
+    },
+    async loadRecipes({ commit }) {
+      console.log(commit)
 
+      const ingredients = this.state.recipes.ingredientsSelected;
+      const params = [];
+      ingredients.forEach(ingredient => params.push(ingredient.name));
+      const paramToSearch = params.join();
+
+      const options = {
+        method: 'GET',
+        url: 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients',
+        params: {
+          ingredients: paramToSearch,
+          number: '5',
+          ranking: '1',
+          ignorePantry: 'true'
+        },
+        headers: {
+          'x-rapidapi-key': process.env.VUE_APP_SPOONCULAR_API_KEY,
+          'x-rapidapi-host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+        }
+      };
+
+      const res = await axios.request(options);
+      const suggestedRecipes = [];
+      res.data.forEach(recipe => {
+        suggestedRecipes.push(recipe)
+      })
+      let ids = [];
+      suggestedRecipes.forEach(recipe => ids.push(recipe.id));
+      const idsToSearch = ids.join()
+
+      const optionsIds = {
+        method: 'GET',
+        url: 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk',
+        params: { ids: idsToSearch },
+        headers: {
+          'x-rapidapi-key': '3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90',
+          'x-rapidapi-host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+        }
+      };
+
+      const infoRecipes = await axios.request(optionsIds)
+      const finalRecipes = [];
+      infoRecipes.data.forEach(recipe => {
+        finalRecipes.push(recipe)
+      })
+
+      for (let i = 0; i < finalRecipes.length; i++) {
+        for (let j = 0; j < suggestedRecipes.length; j++) {
+          if (finalRecipes[i].id === suggestedRecipes[j].id) {
+            finalRecipes[i].missedIngredientCount = suggestedRecipes[j].missedIngredientCount;
+            finalRecipes[i].missedIngredients = suggestedRecipes[j].missedIngredients;
+            finalRecipes[i].usedIngredients = suggestedRecipes[j].usedIngredients;
+          }
+        }
+      }
+      commit('getRecipes', finalRecipes);
+      router.push('/recipes')
+    }
   },
   modules: {
   }
