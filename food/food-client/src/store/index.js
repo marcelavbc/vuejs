@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    isLoading: false,
     user: {
       data: {},
       status: '',
@@ -17,7 +18,8 @@ export default new Vuex.Store({
       ingredientInput: '',
       ingredients: [],
       ingredientsSelected: [],
-      recipesFound: []
+      recipesFound: [],
+      recipeInDetail: {}
     },
 
   },
@@ -42,9 +44,15 @@ export default new Vuex.Store({
     },
     getSelectedIngredients(state) {
       return state.recipes.ingredientsSelected
-    }, 
-    getSuggestedRecipes(state){
+    },
+    getSuggestedRecipes(state) {
       return state.recipes.recipesFound
+    },
+    getDetails(state) {
+      return state.recipes.recipeInDetail
+    },
+    isLoading(state) {
+      return state.isLoading
     }
 
   },
@@ -68,6 +76,9 @@ export default new Vuex.Store({
       state.user.isLoggedIn = false
     },
     //Recipes Mutations
+    isLoading(state) {
+      state.isLoading = !state.isLoading;
+    },
     setInput(state, newInput) {
       state.recipes.ingredientInput = newInput;
     },
@@ -82,8 +93,13 @@ export default new Vuex.Store({
     },
     getRecipes(state, payload) {
       state.recipes.recipesFound = payload;
+    },
+    getRecipe(state, recipe) {
+      state.recipes.recipeInDetail = recipe;
+    },
+    cleanSelection(state) {
+      state.recipes.ingredientsSelected = [];
     }
-
 
   },
   actions: {
@@ -198,9 +214,11 @@ export default new Vuex.Store({
       let index = this.state.recipes.ingredientsSelected.findIndex(element => element === payload)
       commit('deleteIngredient', index)
     },
+    cleanIngredients({ commit }) {
+      commit("cleanSelection")
+    },
     async loadRecipes({ commit }) {
-      console.log(commit)
-
+      commit("isLoading")
       const ingredients = this.state.recipes.ingredientsSelected;
       const params = [];
       ingredients.forEach(ingredient => params.push(ingredient.name));
@@ -256,7 +274,21 @@ export default new Vuex.Store({
         }
       }
       commit('getRecipes', finalRecipes);
-      router.push('/recipes')
+      router.push('/recipes');
+      commit("isLoading")
+
+    },
+    async getRecipeDetails({ commit }, id) {
+      commit("isLoading")
+      const recipeArray = this.state.recipes.recipesFound;
+      const recipe = await recipeArray.find(recipe => recipe.id === id);
+      commit('getRecipe', recipe);
+      setTime()
+      function setTime(){
+        setTimeout(() => {
+          commit("isLoading")
+        }, 1000)
+      }
     }
   },
   modules: {

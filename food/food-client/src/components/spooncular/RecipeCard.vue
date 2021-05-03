@@ -3,7 +3,7 @@
     <div class="recipe-card">
       <div class="img-container">
         <img :src="image" :alt="title" />
-        <i class="fas fa-book-reader details"></i>
+        <slot/>
       </div>
       <article>
         <h3>{{ title }}</h3>
@@ -21,8 +21,8 @@
             <span><i class="fas fa-carrot icon"></i></span><span>Veg</span>
           </li>
           <li class="save-recipe-icon">
-            <span @click="addToFavorites">
-              <i :class="[active ? 'fas' : 'far', 'icon fa-heart']"></i>
+            <span>
+              <i class="far icon fa-heart"></i>
             </span>
           </li>
         </ul>
@@ -90,11 +90,6 @@ export default {
     "recipe",
     "isFavorite",
   ],
-  methods: {
-    isLoggedIn() {
-      return this.$store.getters["users/isLoggedIn"];
-    },
-  },
 };
 </script>
 

@@ -1,24 +1,29 @@
 <template>
   <div class="home">
-    <div class="header">
-      <h2 class="title">
-        Hello,
-        <strong>
-          <span v-if="isLoggedIn">{{ getUser.username }}</span>
-          <span v-else>Chef</span>
-        </strong>
-      </h2>
+    <div v-if="isLoading">
+      <loading-spinner/>
     </div>
-    <div class="main">
-      <search-bar></search-bar>
-      <ingredients-list></ingredients-list>
-      <ingredients-selected></ingredients-selected>
-      <div class="buttons">
-        <the-button @click.native="loadRecipes">Cook</the-button>
-        <the-button @click.native="cleanIngredients">Clean</the-button>
+    <div v-else>
+      <div class="header">
+        <h2 class="title">
+          Hello,
+          <strong>
+            <span v-if="isLoggedIn">{{ getUser.username }}</span>
+            <span v-else>Chef</span>
+          </strong>
+        </h2>
       </div>
-
-      <div v-if="getSelectedIngredients.length"></div>
+      <div class="main">
+        <search-bar></search-bar>
+        <ingredients-list></ingredients-list>
+        <ingredients-selected></ingredients-selected>
+        <div v-if="getSelectedIngredients.length">
+          <div class="buttons">
+            <the-button @click.native="loadRecipes">Cook</the-button>
+            <the-button @click.native="cleanIngredients">Clean</the-button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -35,13 +40,13 @@ export default {
     SearchBar,
     IngredientsList,
     IngredientsSelected,
-  },
+},
   computed: {
-    ...mapGetters(["getUser", "isLoggedIn", "getSelectedIngredients"]),
+    ...mapGetters(["getUser", "isLoggedIn", "getSelectedIngredients", "isLoading"]),
   },
   methods: {
-    ...mapActions(["loadRecipes", "cleanIngredients"]), 
-  }
+    ...mapActions(["loadRecipes", "cleanIngredients"]),
+  },
 };
 </script>
 

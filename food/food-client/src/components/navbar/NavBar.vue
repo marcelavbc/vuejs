@@ -41,6 +41,7 @@ export default {
 
 <style lang="scss" >
 .nav-container {
+  z-index: 100;
   width: 100vw;
   height: 3rem;
   position: fixed;

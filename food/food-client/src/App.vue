@@ -25,6 +25,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  #nav {
+    margin-bottom: 3rem;
+  }
 }
 
 
