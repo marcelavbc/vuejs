@@ -3,7 +3,7 @@
     <div class="recipe-card">
       <div class="img-container">
         <img :src="image" :alt="title" />
-        <slot/>
+        <slot />
       </div>
       <article>
         <h3>{{ title }}</h3>
@@ -20,8 +20,8 @@
           <li v-if="vegetarian">
             <span><i class="fas fa-carrot icon"></i></span><span>Veg</span>
           </li>
-          <li class="save-recipe-icon">
-            <span>
+          <li v-if="isLoggedIn" class="save-recipe-icon">
+            <span @click="toggleFavorite({ id: getUser._id, recipe: recipe })">
               <i class="far icon fa-heart"></i>
             </span>
           </li>
@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "RecipeCard",
   data() {
@@ -90,6 +91,12 @@ export default {
     "recipe",
     "isFavorite",
   ],
+  computed: {
+    ...mapGetters(["isLoggedIn", "getUser"]),
+  },
+  methods: {
+    ...mapActions(["toggleFavorite"]),
+  },
 };
 </script>
 
@@ -190,42 +197,6 @@ export default {
           h4 {
             line-height: 1.3rem;
           }
-        }
-      }
-    }
-  }
-  .modal-container {
-    .modal {
-      position: fixed;
-      width: 80%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #ff833e;
-      padding: 20px;
-      z-index: 101;
-      border-radius: 8px;
-      color: rgba(250, 248, 248);
-      @media only screen and (min-width: 768px) {
-        font-size: 1.2rem;
-        width: 30%;
-        padding: 30px;
-      }
-      .info-modal {
-        text-align: center;
-        line-height: 1.4rem;
-      }
-      .buttons-div {
-        display: flex;
-        width: 100%;
-        justify-content: space-around;
-        margin-top: 0.7rem;
-        button {
-          padding: 8px;
-          border: none;
-          border-radius: 2px;
-          color: #ff833e;
-          background: rgba(250, 248, 248);
         }
       }
     }

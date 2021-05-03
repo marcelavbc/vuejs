@@ -12,7 +12,8 @@ export default new Vuex.Store({
       data: {},
       status: '',
       errorMessage: '',
-      isLoggedIn: false
+      isLoggedIn: false,
+      favorites: []
     },
     recipes: {
       ingredientInput: '',
@@ -53,7 +54,11 @@ export default new Vuex.Store({
     },
     isLoading(state) {
       return state.isLoading
+    },
+    favorites(state) {
+      return state.user.favorites
     }
+
 
   },
   mutations: {
@@ -87,6 +92,8 @@ export default new Vuex.Store({
     },
     getSuggestedIngredients(state, payload) {
       state.recipes.ingredientsSelected.unshift(payload);
+      state.recipes.ingredientInput = '';
+
     },
     deleteIngredient(state, index) {
       state.recipes.ingredientsSelected.splice(index, 1);
@@ -99,6 +106,9 @@ export default new Vuex.Store({
     },
     cleanSelection(state) {
       state.recipes.ingredientsSelected = [];
+    },
+    getAllFavorites(state, payload) {
+      state.user.favorites = payload
     }
 
   },
@@ -273,6 +283,10 @@ export default new Vuex.Store({
           }
         }
       }
+
+      if (this.state.isLoggedIn) {
+        //do something
+      }
       commit('getRecipes', finalRecipes);
       router.push('/recipes');
       commit("isLoading")
@@ -284,11 +298,32 @@ export default new Vuex.Store({
       const recipe = await recipeArray.find(recipe => recipe.id === id);
       commit('getRecipe', recipe);
       setTime()
-      function setTime(){
+      function setTime() {
         setTimeout(() => {
           commit("isLoading")
         }, 1000)
       }
+    },
+    toggleFavorite({ commit }, { id, recipe }) {
+      console.log(commit)
+      axios({ url: `http://localhost:3000/api/favorites/${id}`, data: recipe, method: 'PUT' })
+        .then((resp) => {
+          console.log('the resp', resp)
+        })
+    },
+    getFavoriteRecipes({ commit }, id) {
+      try {
+        console.log('get favorites')
+        axios({ url: `http://localhost:3000/api/favorites/${id}`, method: 'GET' })
+          .then((resp) => {
+            console.log(resp.data)
+            commit('getAllFavorites', resp.data.recipes)
+
+          })
+      } catch (error) {
+        console.log(error)
+      }
+
     }
   },
   modules: {

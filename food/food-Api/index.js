@@ -27,15 +27,13 @@ mongoose.connect(
 
 // import routes
 const authRoutes = require('./routes/auth');
-
-// const favoritesRoutes = require("./routes/favorites");
+const favoritesRoutes = require("./routes/favorites");
 
 app.use(morgan('dev'))
 
 // route middlewares
 app.use('/api/user', authRoutes);
-
-// app.use("/api/favorites", favoritesRoutes);
+app.use("/api/favorites", favoritesRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found')

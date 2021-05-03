@@ -4,12 +4,12 @@
       <router-link to="/">
         <i class="fas fa-home"></i>
       </router-link>
-      <div v-if="loggedIn">
-        <router-link to="/favorites" @click.native="getRecipes">
-          <i class="far fa-heart"></i>
+      <div v-if="isLoggedIn">
+        <router-link to="/favorites">
+          <i class="far fa-heart" @click="getFavoriteRecipes(getUser._id)"></i>
         </router-link>
       </div>
-      <div v-if="loggedIn">
+      <div v-if="isLoggedIn">
         <a @click.prevent="logout" to="/login">
           <i class="fas fa-sign-out-alt"></i>
         </a>
@@ -29,12 +29,10 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "NavBar",
   computed: {
-    ...mapGetters({
-      loggedIn: "isLoggedIn",
-    }),
+    ...mapGetters(["isLoggedIn", "getUser"]),
   },
   methods: {
-    ...mapActions({ logout: "logout" }),
+    ...mapActions(["logout", "getFavoriteRecipes"]),
   },
 };
 </script>
